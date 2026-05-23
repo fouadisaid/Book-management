@@ -36,4 +36,14 @@ public class Category extends BaseEntity {
         this.state = state;
     }
 
+    @Override
+    public String toString() {
+        return "Category{" +
+                "name='" + name + '\'' +
+                ", state=" + state +
+                ", createdAt=" + createdAt +
+                ", id=" + id +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }
