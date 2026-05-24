@@ -18,16 +18,17 @@ public class CategoryImpl implements ICategory {
 
     @Override
     public int create(Category category) {
-        String sql = "insert into category (name, state, created_at, updated_at) values (?,?,?,?)";
+        String sql = "INSERT INTO category (name, state, created_at, updated_at) VALUES (?,?,?,?)";
         try {
             //connexion et preparation de la requete
             db.initPrepar(sql);
 
-            //Passage des valeurs
+            //Passage des parametres
             db.getPstm().setString(1, category.getName());
             db.getPstm().setBoolean(2, true);
             db.getPstm().setObject(3, LocalDateTime.now());
             db.getPstm().setObject(4, null);
+
             ok = db.executeMaj();
             db.closeConnection();
 
@@ -39,16 +40,17 @@ public class CategoryImpl implements ICategory {
 
     @Override
     public int update(Category category) {
-        String sql = "update category set name=?, state=?, updated_at=? where id=?";
+        String sql = "UPDATE category SET name=?, state=?, updated_at=? WHERE id=?";
         try {
             //connexion et preparation de la requete
             db.initPrepar(sql);
 
-            //Passage des valeurs
+            //Passage des parametres
             db.getPstm().setString(1, category.getName());
             db.getPstm().setBoolean(2, category.isState());
             db.getPstm().setObject(3, LocalDateTime.now());
             db.getPstm().setInt(4, category.getId());
+
             ok = db.executeMaj();
             db.closeConnection();
 
@@ -60,14 +62,13 @@ public class CategoryImpl implements ICategory {
 
     @Override
     public int delete(int id) {
-        String sql = "delete from category where id=?";
+        String sql = "DELETE FROM category WHERE id=?";
         try {
             //connexion et preparation de la requete
             db.initPrepar(sql);
 
-            //Passage des valeurs
-
             db.getPstm().setInt(1, id);
+
             ok = db.executeMaj();
             db.closeConnection();
 
@@ -79,22 +80,15 @@ public class CategoryImpl implements ICategory {
 
     @Override
     public List<Category> getAll() {
-        String sql = "select * from category order by name asc";
+        String sql = "SELECT * FROM category ORDER BY name ASC";
         List <Category> categories = new ArrayList<Category>();
 
         try{
             db.initPrepar(sql);
             rs = db.executeSelect();
             while (rs.next()) {
-                //Premiere methode : passage par setters
-                /*Category category = new Category();
-                category.setId(rs.getInt("id"));//recupere la valeur
-                category.setName(rs.getString("name"));
-                category.setState(rs.getBoolean("state"));
-                category.setCreatedAt(rs.getObject("created_at", LocalDateTime.class));
-                category.setUpdatedAt(rs.getObject("updated_at", LocalDateTime.class));*/
 
-                //Deuxième methode : passage par constructeur.
+                //passage par constructeur.
                 Category category = new Category(
                         rs.getInt("id"),
                         rs.getObject("created_at", LocalDateTime.class),
@@ -111,13 +105,13 @@ public class CategoryImpl implements ICategory {
         }catch (Exception e) {
             e.printStackTrace();
         }
-        //retouner les categories
+        //retourner les categories
         return categories;
     }
 
     @Override
     public Category get(int id) {
-        String sql = "select * from category where id=?";
+        String sql = "SELECT * FROM category WHERE id=?";
         Category category = null;
         try{
             db.initPrepar(sql);

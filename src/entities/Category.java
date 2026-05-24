@@ -26,7 +26,6 @@ public class Category extends BaseEntity {
     }
 
     //constructeurs
-
     public Category() {
     }
 

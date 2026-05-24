@@ -39,4 +39,5 @@ public class BaseEntity {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
 }

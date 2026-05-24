@@ -56,7 +56,6 @@ public class ConnexionDB {
         rs = null;
 
         try {
-
             rs = pstm.executeQuery();
 
         } catch (Exception e) {
@@ -67,11 +66,10 @@ public class ConnexionDB {
         return rs;
     }
 
-    // Exécuter : INSERT UPDATE DELETE
+    // Exécuter : INSERT, UPDATE, DELETE
     public int executeMaj() {
 
         try {
-
             ok = pstm.executeUpdate();
 
         } catch (Exception e) {
@@ -99,7 +97,6 @@ public class ConnexionDB {
     }
 
     public PreparedStatement getPstm() {
-
         return pstm;
     }
 }

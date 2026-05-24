@@ -74,4 +74,21 @@ public class Book extends BaseEntity {
         this.publicationYear = publicationYear;
         this.category = category;
     }
+
+    //Methode toString
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", countPages=" + countPages +
+                ", publicationYear=" + publicationYear +
+                ", category=" + category +
+                ", id=" + id +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }
